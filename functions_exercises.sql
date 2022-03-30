@@ -26,7 +26,7 @@ WHERE gender = 'm'
     OR first_name = 'Maya');
 
 # TODO: Update your queries for employees whose names start and end with 'E'. Use concat() to combine their first and last name together as a single column in your results.
-SELECT CONCAT(first_name, ' ', last_name)
+SELECT CONCAT(first_name, ' ', last_name) as full_name
 FROM employees
 WHERE last_name LIKE 'e%'
    OR last_name like '%e';
