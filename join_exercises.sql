@@ -37,6 +37,7 @@ FROM employees
               ON de.dept_no = d.dept_no
 WHERE dept_name = 'Customer Service'
   AND t.to_date >= CURDATE()
+  AND de.to_date >= CURDATE()
 GROUP BY title
 ORDER BY count(title) DESC;
 
@@ -56,3 +57,15 @@ FROM employees as e
 WHERE dm.to_date >= CURDATE()
   AND s.to_date >= CURDATE()
 ORDER BY d.dept_name;
+
+# TODO: Bonus Find the names of all current employees, their department name, and their current manager's name
+SELECT CONCAT(e.first_name, ' ', e.last_name)   AS 'Employee',
+       d.dept_name                              AS 'Department Name',
+       CONCAT(e2.first_name, ' ', e2.last_name) AS 'Department Manager'
+FROM employees AS e
+         JOIN dept_emp de ON e.emp_no = de.emp_no
+         JOIN departments d ON de.dept_no = d.dept_no
+         JOIN dept_manager dm ON d.dept_no = dm.dept_no
+         JOIN employees e2 ON e2.emp_no = dm.emp_no
+WHERE de.to_date > CURDATE()
+  AND dm.to_date > CURDATE();
