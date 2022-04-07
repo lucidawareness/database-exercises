@@ -1,6 +1,6 @@
 # TODO: Find all the employees with the same hire date as employee 101010 using a sub-query.
 # 69 Rows
-SELECT CONCAT(first_name, ' ', last_name)
+SELECT CONCAT(first_name, ' ', last_name) AS 'Employee'
 FROM employees
 WHERE hire_date = (SELECT hire_date FROM employees WHERE emp_no = '101010');
 
